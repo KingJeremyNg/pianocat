@@ -2,9 +2,9 @@
   "name": "pianocat",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "midi": "^1.0.0"
-  }
+    "webmidi": "^2.5.1"
+  },
+  "devDependencies": {}
 }
