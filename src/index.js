@@ -69,8 +69,8 @@ function display(data, pair) {
         else data.leftHand.innerHTML = (`<img src="${json.leftUp}">`);
         if (pair.right) data.rightHand.innerHTML = (`<img src="../src/imgs/catRightDown${pair.right}.png">`);
         else data.rightHand.innerHTML = (`<img src="${json.rightUp}">`);
-        console.log(data.leftHand.innerHTML);
-        console.log(data.rightHand.innerHTML);
+        // console.log(data.leftHand.innerHTML);
+        // console.log(data.rightHand.innerHTML);
     }
     else {
         data.leftHand.innerHTML = (`<img src="${json.leftUp}">`);
