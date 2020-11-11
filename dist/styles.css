@@ -4,4 +4,5 @@ body {
 
 img {
     width: 1000px;
+    position: absolute;
 }

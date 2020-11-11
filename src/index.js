@@ -5,6 +5,8 @@ WebMidi.enable(function (err) {
     else {
         var text = document.getElementById("text");
         var cat = document.getElementById("cat");
+        var leftHand = document.getElementById("left");
+        var rightHand = document.getElementById("right");
         var keys = [];
         var octaves = [];
         // console.log(element);
@@ -26,9 +28,9 @@ WebMidi.enable(function (err) {
             // console.log("Received 'noteon' message (" + e.note.name + e.note.octave + ").");
             keys.push(`${e.note.name}${e.note.octave}`);
             octaves.push(`${e.note.octave}`);
-            text.innerHTML = (`${keys}`);
-            handPairs(octaves.sort);
-            cat.innerHTML = (`<img src="../src/imgs/catDown.png">`)
+            
+            handPairs({keys, octaves, text, cat, leftHand, rightHand});
+            // cat.innerHTML = (`<img src="../src/imgs/catDown.png">`);
             // console.log(keys);
             // console.log(octaves);
         });
@@ -37,23 +39,69 @@ WebMidi.enable(function (err) {
             // console.log("Received 'noteoff' message (" + e.note.name + e.note.octave + ").");
             keys.splice(keys.indexOf(`${e.note.name}${e.note.octave}`), 1);
             octaves.splice(octaves.indexOf(`${e.note.octave}`), 1);
-            text.innerHTML = (`${keys}`);
-            handPairs(octaves.sort);
-            cat.innerHTML = (`<img src="../src/imgs/catUp.png">`)
+
+            handPairs({keys, octaves, text, cat, leftHand, rightHand});
+            // cat.innerHTML = (`<img src="../src/imgs/catUp.png">`);
             // console.log(keys);
             // console.log(octaves);
         });
     }
 });
 
-function handPairs(octaves) {
-
+function handPairs(data) {
+    var left, right;
+    data.octaves.sort();
+    // console.log(octaves);
+    // console.log(octaves.length);
+    left = data.octaves[0];
+    right = data.octaves[data.octaves.length - 1];
+    display(data, {left, right});
 }
 
-function display(pair) {
-    
+function display(data, pair) {
+    // console.log("left " + pair.left);
+    // console.log("right " + pair.right);
+    data.text.innerHTML = (`${data.keys}`);
+    data.cat.innerHTML = ("<img src='../src/imgs/catBody.png'>");
+
+    if (pair.left || pair.right) {
+        if (pair.left) data.leftHand.innerHTML = (`<img src="../src/imgs/catLeftDown${pair.left}.png">`);
+        else data.leftHand.innerHTML = (`<img src="${json.leftUp}">`);
+        if (pair.right) data.rightHand.innerHTML = (`<img src="../src/imgs/catRightDown${pair.right}.png">`);
+        else data.rightHand.innerHTML = (`<img src="${json.rightUp}">`);
+        console.log(data.leftHand.innerHTML);
+        console.log(data.rightHand.innerHTML);
+    }
+    else {
+        data.leftHand.innerHTML = (`<img src="${json.leftUp}">`);
+        data.rightHand.innerHTML = (`<img src="${json.rightUp}">`);
+        // console.log(data.cat.innerHTML);
+    }
+    // data.cat.innerHTML = (`<img src="${json.right + pair.right}">`);
 }
 
-// TODO - GROUP THE THE KEYS WITHIN A TIME WINDOW AND SELECT A PAIR
-// eg. key 21, 25, 29, 70, 75 result in left hand on 25 and right hand on 72/73
-// keys range from 21-108
+// CURRENTLY USELESS
+var json = {
+    "catDown" : "../src/imgs/catDown.png",
+    "catUp" : "../src/imgs/catUp.png",
+    "rightUp": "../src/imgs/catRightUp.png",
+    "right8" : "../src/imgs/catRight7.png",
+    "right7" : "../src/imgs/catRight7.png",
+    "right6" : "../src/imgs/catRight6.png",
+    "right5" : "../src/imgs/catRight5.png",
+    "right4" : "../src/imgs/catRight4.png",
+    "right3" : "",
+    "right2" : "",
+    "right1" : "",
+    "right0" : "",
+    "leftUp" : "../src/imgs/catLeftUp.png",
+    "left8" : "",
+    "left7" : "",
+    "left6" : "",
+    "left5" : "",
+    "left4" : "",
+    "left3" : "../src/imgs/catLeft3.png",
+    "left2" : "../src/imgs/catLeft2.png",
+    "left1" : "../src/imgs/catLeft1.png",
+    "left0" : "../src/imgs/catLeft1.png"
+}
