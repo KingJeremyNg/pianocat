@@ -22,7 +22,10 @@ WebMidi.enable(function (err) {
         });
 
         // var output = WebMidi.getOutputByName("Digital Piano");
-        var input = WebMidi.getInputByName("Digital Piano");
+
+        // var input = WebMidi.getInputByName("Digital Piano");
+        var input = WebMidi.inputs[0];
+        console.log(input);
 
         input.addListener('noteon', "all", function (e) {
             // console.log("Received 'noteon' message (" + e.note.name + e.note.octave + ").");
