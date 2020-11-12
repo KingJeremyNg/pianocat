@@ -31,8 +31,8 @@ WebMidi.enable(function (err) {
             // console.log("Received 'noteon' message (" + e.note.name + e.note.octave + ").");
             keys.push(`${e.note.name}${e.note.octave}`);
             octaves.push(`${e.note.octave}`);
-            
-            handPairs({keys, octaves, text, cat, leftHand, rightHand});
+
+            handPairs({ keys, octaves, text, cat, leftHand, rightHand });
             // cat.innerHTML = (`<img src="../src/imgs/catDown.png">`);
             // console.log(keys);
             // console.log(octaves);
@@ -43,7 +43,7 @@ WebMidi.enable(function (err) {
             keys.splice(keys.indexOf(`${e.note.name}${e.note.octave}`), 1);
             octaves.splice(octaves.indexOf(`${e.note.octave}`), 1);
 
-            handPairs({keys, octaves, text, cat, leftHand, rightHand});
+            handPairs({ keys, octaves, text, cat, leftHand, rightHand });
             // cat.innerHTML = (`<img src="../src/imgs/catUp.png">`);
             // console.log(keys);
             // console.log(octaves);
@@ -54,11 +54,19 @@ WebMidi.enable(function (err) {
 function handPairs(data) {
     var left, right;
     data.octaves.sort();
-    // console.log(octaves);
+    data.octaves = data.octaves.filter((item, i, ar) => ar.indexOf(item) === i);
+    // console.log(data.octaves);
     // console.log(octaves.length);
-    left = data.octaves[0];
-    right = data.octaves[data.octaves.length - 1];
-    display(data, {left, right});
+    if (data.octaves.length == 1) {
+        if (data.octaves[0] >= 4) right = data.octaves[0];
+        if (data.octaves[0] < 4) left = data.octaves[0];
+        display(data, { left, right });
+    }
+    else {
+        left = data.octaves[0];
+        right = data.octaves[data.octaves.length - 1];
+        display(data, { left, right });
+    }
 }
 
 function display(data, pair) {
@@ -85,26 +93,26 @@ function display(data, pair) {
 
 // CURRENTLY USELESS
 var json = {
-    "catDown" : "../src/imgs/catDown.png",
-    "catUp" : "../src/imgs/catUp.png",
+    "catDown": "../src/imgs/catDown.png",
+    "catUp": "../src/imgs/catUp.png",
     "rightUp": "../src/imgs/catRightUp.png",
-    "right8" : "../src/imgs/catRight7.png",
-    "right7" : "../src/imgs/catRight7.png",
-    "right6" : "../src/imgs/catRight6.png",
-    "right5" : "../src/imgs/catRight5.png",
-    "right4" : "../src/imgs/catRight4.png",
-    "right3" : "",
-    "right2" : "",
-    "right1" : "",
-    "right0" : "",
-    "leftUp" : "../src/imgs/catLeftUp.png",
-    "left8" : "",
-    "left7" : "",
-    "left6" : "",
-    "left5" : "",
-    "left4" : "",
-    "left3" : "../src/imgs/catLeft3.png",
-    "left2" : "../src/imgs/catLeft2.png",
-    "left1" : "../src/imgs/catLeft1.png",
-    "left0" : "../src/imgs/catLeft1.png"
+    "right8": "../src/imgs/catRight7.png",
+    "right7": "../src/imgs/catRight7.png",
+    "right6": "../src/imgs/catRight6.png",
+    "right5": "../src/imgs/catRight5.png",
+    "right4": "../src/imgs/catRight4.png",
+    "right3": "",
+    "right2": "",
+    "right1": "",
+    "right0": "",
+    "leftUp": "../src/imgs/catLeftUp.png",
+    "left8": "",
+    "left7": "",
+    "left6": "",
+    "left5": "",
+    "left4": "",
+    "left3": "../src/imgs/catLeft3.png",
+    "left2": "../src/imgs/catLeft2.png",
+    "left1": "../src/imgs/catLeft1.png",
+    "left0": "../src/imgs/catLeft1.png"
 }
