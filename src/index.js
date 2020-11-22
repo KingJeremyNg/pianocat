@@ -62,6 +62,11 @@ function handPairs(data) {
         if (data.octaves[0] < 4) left = data.octaves[0];
         display(data, { left, right });
     }
+    else if (data.octaves.length == 2 && data.octaves[0] == data.octaves[1] - 1 && data.keys.length < 5) {
+        if (data.octaves[0] >= 4) right = data.octaves[0];
+        else if (data.octaves[1] < 4) left = data.octaves[0];
+        display(data, { left, right });
+    }
     else {
         left = data.octaves[0];
         right = data.octaves[data.octaves.length - 1];
