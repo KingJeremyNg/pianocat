@@ -2,4 +2,4 @@
 ![Demo](media/demo.gif)
 
 # Final Product Demo
-[Instagram Link](https://www.instagram.com/tv/CHebnNaB49t/?utm_source=ig_web_button_share_sheet)
+[![BongoCat plays piano](http://img.youtube.com/vi/eNmnszeAE0E/0.jpg)](http://www.youtube.com/watch?v=eNmnszeAE0E "BongoCat plays piano")
